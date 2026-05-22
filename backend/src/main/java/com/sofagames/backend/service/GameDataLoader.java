@@ -164,7 +164,7 @@ public class GameDataLoader implements ApplicationListener<ApplicationReadyEvent
         game.setCapsuleImage((String) data.get("capsule_image"));
         game.setBackgroundRaw((String) data.get("background_raw"));
         game.setWebsite((String) data.get("website"));
-        game.setFree((Boolean) data.getOrDefault("is_free", false));
+        game.setIsFree((Boolean) data.getOrDefault("is_free", false));
 
         // price_overview
         if (data.containsKey("price_overview") && data.get("price_overview") != null) {
