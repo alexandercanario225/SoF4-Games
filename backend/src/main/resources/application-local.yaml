@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://ep-sparkling-tree-ac9xtymj-pooler.sa-east-1.aws.neon.tech/sofagamesdb?sslmode=require
+    username: neondb_owner
+    password: npg_EouXOh2IAwK7
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
