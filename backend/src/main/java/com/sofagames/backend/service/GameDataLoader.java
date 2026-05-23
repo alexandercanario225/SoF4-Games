@@ -92,32 +92,32 @@ public class GameDataLoader implements ApplicationListener<ApplicationReadyEvent
                     }
                 }
 
-                // Process developers
+                // Process developers (list of strings)
                 if (gameData.containsKey("developers")) {
                     @SuppressWarnings("unchecked")
-                    List<Map<String, Object>> developers = (List<Map<String, Object>>) gameData.get("developers");
-                    for (Map<String, Object> devData : developers) {
-                        String name = (String) devData.get("name");
-                        Developer developer = developerRepository.findByName(name)
+                    List<String> developers = (List<String>) gameData.get("developers");
+                    for (String devName : developers) {
+                        if (devName == null || devName.isBlank()) continue;
+                        Developer developer = developerRepository.findByName(devName)
                                 .orElseGet(() -> {
                                     Developer d = new Developer();
-                                    d.setName(name);
+                                    d.setName(devName);
                                     return developerRepository.save(d);
                                 });
                         savedGame.getDevelopers().add(developer);
                     }
                 }
 
-                // Process publishers
+                // Process publishers (list of strings)
                 if (gameData.containsKey("publishers")) {
                     @SuppressWarnings("unchecked")
-                    List<Map<String, Object>> publishers = (List<Map<String, Object>>) gameData.get("publishers");
-                    for (Map<String, Object> pubData : publishers) {
-                        String name = (String) pubData.get("name");
-                        Publisher publisher = publisherRepository.findByName(name)
+                    List<String> publishers = (List<String>) gameData.get("publishers");
+                    for (String pubName : publishers) {
+                        if (pubName == null || pubName.isBlank()) continue;
+                        Publisher publisher = publisherRepository.findByName(pubName)
                                 .orElseGet(() -> {
                                     Publisher p = new Publisher();
-                                    p.setName(name);
+                                    p.setName(pubName);
                                     return publisherRepository.save(p);
                                 });
                         savedGame.getPublishers().add(publisher);

@@ -83,7 +83,7 @@ public class Game {
     @Builder.Default
     private Integer achievementsTotal = 0;
 
-    @Column(name = "system_requirements", columnDefinition = "JSONB")
+    @Column(name = "system_requirements", columnDefinition = "TEXT")
     private String systemRequirements;
 
     @CreationTimestamp
