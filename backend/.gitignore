@@ -36,3 +36,5 @@ build/
 .env
 .env.local
 application-local.yaml
+neon.log
+
