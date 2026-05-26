@@ -1,0 +1,27 @@
+* [33m53a662c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mjulio-oyarzun[m[33m)[m chore: update pom.xml dependencies and database configuration
+* [33m840cbef[m chore: remove stray temporary and backup files; fix pom.xml and add JacksonConfig for ObjectMapper bean; ensure SG-55 DataLoader works
+* [33m53ab465[m feat: add JacksonConfig to provide ObjectMapper bean for GameDataLoader
+* [33m0b1026e[m feat: add application-local.yaml for Neon.tech DB config (SG-55)
+* [33mb50e318[m fix: add Jackson dependency and correct setter method for isFree in GameDataLoader
+* [33m4d7ac1e[m feat: add catalog JSON, GameRepository, and GameDataLoader for SG-55
+* [33mce6357c[m feat: add ScreenshotRepository for SG-55
+* [33m131b585[m feat: add PublisherRepository with findByName method for SG-55
+* [33m62bf1e9[m feat: add DeveloperRepository with findByName method for SG-55
+* [33mb0e6501[m[33m ([m[1;32mmain[m[33m)[m feat: add GenreRepository for SG-55
+* [33m6299483[m feat: add JPA entities Game, Genre, Category, Developer, Publisher, Screenshot for catalog data loader (SG-55)
+* [33m80a75db[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m style(storepage): enhance store layout and responsiveness with new features (#9)
+* [33m00ddd53[m chore(config): initial vercel deployment setup (#6)
+* [33m7e68646[m docs: add fork setup instructions and upstream sync to contributing.md (#2)
+[31m|[m * [33maa1942f[m[33m ([m[1;31morigin/develop[m[33m)[m refactor(store): extract HeroCarousel, GameCard and GameSection into components (#11)
+[31m|[m * [33md17a81f[m chore(develop): sync main fixes into develop (#12)
+[31m|[m * [33m630e684[m style(storepage): enhance store layout and responsiveness with new features (#7)
+[31m|[m * [33m96a1f5d[m feat(store): add store page with hero carousel, game sections and mobile responsive (#5)
+[31m|[m * [33md1df583[m feat(frontend): add games-mock.json (#4)
+[31m|[m * [33mb37191b[m docs: add fork setup instructions and upstream sync to contributing.md (#1)
+[31m|[m[31m/[m  
+* [33md93d0bd[m chore(frontend): add frontend structure
+* [33m2a8fad9[m chore(backend): disable open-in-view and remove explicit Hibernate dialect
+* [33m8b02067[m docs(backend): update application-local.example with Neon connection string format
+* [33m55d728b[m chore(backend): add db schema.sql
+* [33ma2b1885[m chore: add project structure, README, CONTRIBUTING and backend setup
+* [33mfac1f99[m Initial commit

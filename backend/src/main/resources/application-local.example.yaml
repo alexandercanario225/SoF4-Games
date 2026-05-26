@@ -24,4 +24,4 @@ jwt:
   secret: REEMPLAZAR_con_string_aleatorio_minimo_32_caracteres
 
 server:
-  port: 8081
+  port: 8080

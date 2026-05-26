@@ -61,7 +61,7 @@ public class GameDataLoader implements ApplicationListener<ApplicationReadyEvent
                     @SuppressWarnings("unchecked")
                     List<Map<String, Object>> genres = (List<Map<String, Object>>) gameData.get("genres");
                     for (Map<String, Object> genreData : genres) {
-                        Integer id = ((Number) genreData.get("id")).intValue();
+                        Integer id = parseIntSafe(genreData.get("id"));
                         String name = (String) genreData.get("description") != null ? (String) genreData.get("description") : (String) genreData.get("name");
                         Genre genre = genreRepository.findById(id)
                                 .orElseGet(() -> {
@@ -79,7 +79,7 @@ public class GameDataLoader implements ApplicationListener<ApplicationReadyEvent
                     @SuppressWarnings("unchecked")
                     List<Map<String, Object>> categories = (List<Map<String, Object>>) gameData.get("categories");
                     for (Map<String, Object> catData : categories) {
-                        Integer id = ((Number) catData.get("id")).intValue();
+                        Integer id = parseIntSafe(catData.get("id"));
                         String name = (String) catData.get("description") != null ? (String) catData.get("description") : (String) catData.get("name");
                         Category category = categoryRepository.findById(id)
                                 .orElseGet(() -> {
@@ -157,7 +157,18 @@ public class GameDataLoader implements ApplicationListener<ApplicationReadyEvent
     private Game mapToGame(Map<String, Object> data) {
         Game game = new Game();
 
-        game.setSteamAppId(((Number) data.get("steam_appid")).intValue());
+        Object steamAppIdObj = data.get("steam_appid");
+        int steamAppId;
+        if (steamAppIdObj instanceof Integer) {
+            steamAppId = (Integer) steamAppIdObj;
+        } else if (steamAppIdObj instanceof Long) {
+            steamAppId = ((Long) steamAppIdObj).intValue();
+        } else if (steamAppIdObj instanceof String) {
+            steamAppId = Integer.parseInt((String) steamAppIdObj);
+        } else {
+            steamAppId = 0; // valor por defecto seguro
+        }
+        game.setSteamAppId(steamAppId);
         game.setName((String) data.get("name"));
         game.setShortDescription((String) data.get("short_description"));
         game.setHeaderImage((String) data.get("header_image"));
@@ -171,9 +182,9 @@ public class GameDataLoader implements ApplicationListener<ApplicationReadyEvent
             @SuppressWarnings("unchecked")
             Map<String, Object> priceOverview = (Map<String, Object>) data.get("price_overview");
             game.setCurrency((String) priceOverview.get("currency"));
-            game.setPriceInitial(((Number) priceOverview.getOrDefault("initial", 0)).intValue());
-            game.setPriceFinal(((Number) priceOverview.getOrDefault("final", 0)).intValue());
-            game.setDiscountPercent(((Number) priceOverview.getOrDefault("discount_percent", 0)).intValue());
+            game.setPriceInitial(parseIntSafe(priceOverview.get("initial")));
+            game.setPriceFinal(parseIntSafe(priceOverview.get("final")));
+            game.setDiscountPercent(parseIntSafe(priceOverview.get("discount_percent")));
         } else {
             game.setCurrency("CLP"); // default
             game.setPriceInitial(0);
@@ -219,5 +230,24 @@ public class GameDataLoader implements ApplicationListener<ApplicationReadyEvent
         // createdAt will be set by @CreationTimestamp
 
         return game;
+    }
+
+    private int parseIntSafe(Object obj) {
+        if (obj == null) {
+            return 0;
+        }
+        if (obj instanceof Integer) {
+            return (Integer) obj;
+        } else if (obj instanceof Long) {
+            return ((Long) obj).intValue();
+        } else if (obj instanceof String) {
+            try {
+                return Integer.parseInt((String) obj);
+            } catch (NumberFormatException e) {
+                return 0;
+            }
+        } else {
+            return 0;
+        }
     }
 }

@@ -1,13 +1,26 @@
 spring:
   datasource:
-    url: jdbc:postgresql://ep-sparkling-tree-ac9xtymj-pooler.sa-east-1.aws.neon.tech/sofagamesdb?sslmode=require
+    url: jdbc:postgresql://ep-sparkling-tree-ac9xtymj-pooler.sa-east-1.aws.neon.tech/sofagamesdb?sslmode=require&connect_timeout=10
     username: neondb_owner
     password: npg_EouXOh2IAwK7
     driver-class-name: org.postgresql.Driver
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 5
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      keepalive-time: 60000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: false
+
+jwt:
+  secret: "Q8k5vVTGRe8ITF9p+a7Wqp9FQeGDim6VSpr54lQat1xKrgSReC/vtYcdUhYwDkZM"
+  expiration:
+    ms: 604800000
 
 server:
   port: 8081
